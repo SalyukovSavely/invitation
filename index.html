@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Для тебя 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 50%, #ffd6e0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #5d4037;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            display: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .photo-frame {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(183, 28, 28, 0.15);
+            margin: 15px 0;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            max-height: 320px;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .text {
+            color: #6d4c41;
+            font-size: 1.15em;
+            line-height: 1.7;
+            margin: 18px 0;
+            padding: 0 10px;
+        }
+
+        .title {
+            color: #c2185b;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .heart {
+            font-size: 2.5em;
+            animation: heartbeat 1.2s infinite;
+            cursor: pointer;
+            display: inline-block;
+            margin: 15px 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ec407a, #c2185b);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(194, 24, 91, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(194, 24, 91, 0.4);
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(194, 24, 91, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #c2185b;
+            transform: scale(1.2);
+        }
+
+        .invitation {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px 25px;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(194, 24, 91, 0.2);
+        }
+
+        .invitation h1 {
+            color: #c2185b;
+            font-size: 1.7em;
+            margin-bottom: 18px;
+        }
+
+        .invitation p {
+            color: #5d4037;
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin: 12px 0;
+        }
+
+        .date {
+            background: linear-gradient(135deg, #ec407a, #c2185b);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 15px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .final-photo {
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .final-photo img {
+            width: 100%;
+            max-height: 220px;
+            border-radius: 10px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            animation: fall 3s linear infinite;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container { padding: 10px; }
+            .photo-frame { padding: 8px; }
+            .text { font-size: 1.05em; }
+            .invitation { padding: 25px 20px; }
+            .invitation h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Слайд 1 -->
+        <div class="slide active" id="slide1">
+            <p class="title">✨ Всё началось...</p>
+            <div class="photo-frame">
+                <img src="1.jpeg" alt="Фото 1">
+            </div>
+            <p class="text">
+                Наше первое свидание...<br>
+                Тот самый момент, когда я понял — ты особенная 💕
+            </p>
+            <button class="btn" onclick="nextSlide()">Дальше →</button>
+        </div>
+
+        <!-- Слайд 2 -->
+        <div class="slide" id="slide2">
+            <p class="title">🍓 Тёплый день...</p>
+            <div class="photo-frame">
+                <img src="2.jpeg" alt="Фото 2">
+            </div>
+            <p class="text">
+                Наш первый пикник...<br>
+                Солнце, фрукты, смех — и я не хотел, чтобы этот день заканчивался 🌞
+            </p>
+            <button class="btn" onclick="nextSlide()">Дальше →</button>
+        </div>
+
+        <!-- Слайд 3 -->
+        <div class="slide" id="slide3">
+            <p class="title">⛷️ Первая вершина...</p>
+            <div class="photo-frame">
+                <img src="3.jpeg" alt="Фото 3">
+            </div>
+            <p class="text">
+                Наша первая совместная горнолыжка...<br>
+                Держаться за руку на склоне — волнительно и так тепло 🏔️
+            </p>
+            <button class="btn" onclick="nextSlide()">Дальше →</button>
+        </div>
+
+        <!-- Слайд 4 -->
+        <div class="slide" id="slide4">
+            <p class="title">✈️ Наше приключение...</p>
+            <div class="photo-frame">
+                <img src="4.jpeg" alt="Фото 4">
+            </div>
+            <p class="text">
+                Моё прошлое путешествие на твой день рождения...<br>
+                Видеть твой счастливый взгляд — лучший подарок для меня 🎁
+            </p>
+            <div class="heart" onclick="nextSlide()">💕</div>
+            <p style="color: #c2185b; margin-top: 10px; font-size: 0.9em;">Нажми на сердце</p>
+        </div>
+
+        <!-- Финал -->
+        <div class="slide" id="slideFinal">
+            <div class="invitation">
+                <h1>💝 Приглашение 💝</h1>
+                
+                <div class="final-photo">
+                    <img src="5.png" alt="Шоппинг">
+                </div>
+                
+                <p><b>Любимая!</b></p>
+                <p>Я хочу продолжить нашу историю новыми моментами...</p>
+                
+                <div class="date">🛍️ 13 сентября</div>
+                <p><b>Шоппинг в любимых магазинах</b></p>
+                <p>Выбирай всё, что понравится — этот день для тебя!</p>
+                
+                <p style="margin-top: 20px; font-style: italic; color: #c2185b;">
+                    А 14 сентября...<br>
+                    тебя ждёт сюрприз 🎁💖
+                </p>
+                
+                <div class="heart">💕</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            if (index === totalSlides - 1) {
+                createConfetti();
+            }
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+            showSlide(currentSlide);
+        }
+
+        function createConfetti() {
+            const colors = ['#ec407a', '#f48fb1', '#f8bbd9', '#c2185b', '#ffd700', '#ff6b6b'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(function() {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    setTimeout(function() { confetti.remove(); }, 4000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
